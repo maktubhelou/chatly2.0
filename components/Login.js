@@ -7,7 +7,7 @@ class Login extends React.Component {
     const { screen, text, button } = styles;
     return(
       <View style={screen}>
-        <Text style={text}>Login Page</Text>
+        <Text style={text}>Welcome to Chatly 2.0</Text>
         <TouchableHighlight onPress={() => this.props.navigation.navigate('NavScreen')}>
           <Text style={button}>Login!</Text>
         </TouchableHighlight>
