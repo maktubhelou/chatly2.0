@@ -1,5 +1,8 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "name": "Chatly 2.0",
+    "slug": "chatly-app",
+    "sdkVersion": "27.0.0",
+    "privacy": "unlisted"
   }
 }

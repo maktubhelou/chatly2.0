@@ -12,7 +12,7 @@ const MainScreen = createStackNavigator(
 },
 {
   //headerMode: 'none',
-  initialRouteName: 'NavScreen',
+  initialRouteName: 'Home',
   }
 );
 

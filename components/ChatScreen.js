@@ -1,10 +1,20 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import styles from '../styles';
+import openSocket from 'socket.io-client';
 
 import { GiftedChat } from 'react-native-gifted-chat'
 
+const socket = openSocket('http://localhost:3000');
+
 class ChatScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  
+    // Creating the socket-client instance will automatically connect to the server.
+    this.socket = socket;
+  }
+
   state = {
     messages: [],
   }
@@ -28,6 +38,7 @@ class ChatScreen extends React.Component {
 
   onSend(messages = []) {
     this.setState(previousState => ({
+
       messages: GiftedChat.append(previousState.messages, messages),
     }))
   }
