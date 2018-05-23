@@ -19,6 +19,9 @@ export default styles = StyleSheet.create({
     color: '#7789aa',
     backgroundColor: '#ddeeff',
   },
+  horizontal: {
+    flexDirection: 'row',
+  },
   button: {
     fontSize: 32,
     color: '#7789aa',
