@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { icons } from '../colors.js'
 
-
 const UserListScreen = ( {counter, dispatch} ) => {
-    const { screen, text, header, button, horizontal } = styles;
-    return(
+  const { screen, text, header, button, horizontal } = styles;
+  console.log(counter);
+  return(
       <View style={screen}>
         <Text style={header}>User List</Text>
         <Text style={text}>Logged in: {counter}</Text>
@@ -26,7 +26,7 @@ const UserListScreen = ( {counter, dispatch} ) => {
 
 const mapStateToProps = (state, props) => {
   return {
-    counter: state,
+    counter: state.userCounter,
   }
 }
 

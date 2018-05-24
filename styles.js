@@ -10,7 +10,15 @@ export default styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
+    padding: 15,
     color: '#ffffff',
+  },
+  textInput: {
+    width: '80%',
+    padding: 10,
+    fontSize: 20,
+    backgroundColor: '#ffffff',
+    textAlign: 'center',
   },
   header: {
     fontSize: 40,
