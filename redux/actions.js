@@ -9,6 +9,6 @@ export const newMessage = (message, author) => {
   return {
     type: 'NEW_MESSAGE',
     text: message,
-    user: author,
+    author: author,
   }
 }

@@ -20,7 +20,7 @@ const initialMessages = [
 
 const messageBox = (state = initialMessages, action) => {
   switch(action.type) {
-    case 'NEW_MESSAGE':
+    case 'SEND_MESSAGE':
       console.log(action);
       const { _id, text, createdAt, user} = action.text[0];
       return state.concat([
@@ -31,8 +31,16 @@ const messageBox = (state = initialMessages, action) => {
           user,
         }
       ]);
-    case 'SEND_MESSAGE':
-      ////
+    case 'NEW_MESSAGE':
+      console.log(action);
+      return state.concat([
+        {
+          text: action.text,
+          user: {
+            _id: action.author,
+          }
+        }
+      ])
     default:
       return state;
   }

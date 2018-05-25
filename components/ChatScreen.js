@@ -5,8 +5,9 @@ import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
 import { GiftedChat } from 'react-native-gifted-chat'
 import { sendMessage } from '../redux/actions';
+import { newMessage } from '../redux/actions';
 
-const socket = openSocket('http://localhost:5000');
+export const socket = openSocket('http://localhost:5000');
 
 class ChatScreen extends React.Component {
   constructor(props) {
@@ -15,13 +16,20 @@ class ChatScreen extends React.Component {
   }
 
   componentWillMount() {
+    dispatch = this.props.dispatch;
+    console.log(dispatch);
     socket.emit('new user', 'Mark Evans', function(data){
+    });
+    socket.on('new message', function(data){
+      dispatch( {type: 'NEW_MESSAGE', text: data.msg, author: data.nick })
     });
   }
   
   onSend(messages) {
     messageText = messages[0].text;
-    this.props.dispatch({ type: 'NEW_MESSAGE', text: messages })
+    socket.emit('send message', messageText);
+    console.log(this.props);
+    this.props.dispatch({ type: 'SEND_MESSAGE', text: messages })
   }
 
   render() {
