@@ -1,7 +1,9 @@
 import React from 'react';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import ReduxThunk from 'redux-thunk';
 
-
+const middleware = applyMiddleware(ReduxThunk, logger);
 
 const initialMessages = [
   {
@@ -19,9 +21,18 @@ const initialMessages = [
 const messageBox = (state = initialMessages, action) => {
   switch(action.type) {
     case 'NEW_MESSAGE':
-      return {
-        state: state.concat(action.data),
-      }
+      console.log(action);
+      const { _id, text, createdAt, user} = action.text[0];
+      return state.concat([
+        {
+          _id,
+          text,
+          createdAt,
+          user,
+        }
+      ]);
+    case 'SEND_MESSAGE':
+      ////
     default:
       return state;
   }
@@ -43,4 +54,4 @@ const rootReducer = combineReducers({
   messageBox,
 })
 
-export default store = createStore(rootReducer);
+export default store = createStore(rootReducer, middleware);
