@@ -32,15 +32,20 @@ const messageBox = (state = initialMessages, action) => {
         }
       ]);
     case 'NEW_MESSAGE':
-      console.log(action);
-      return state.concat([
-        {
-          text: action.text,
-          user: {
-            _id: action.author,
+      if (action.author === "Mark Evans" || action.user === "Mark Evans") {
+        return state
+      } else {
+        return state.concat([
+          {
+            _id: Math.random()*10000,
+            createdAt: action.createdAt,
+            text: action.text,
+            user: {
+              _id: action.author,
+            }
           }
-        }
-      ])
+        ])
+      }
     default:
       return state;
   }

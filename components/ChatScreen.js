@@ -21,7 +21,8 @@ class ChatScreen extends React.Component {
     socket.emit('new user', 'Mark Evans', function(data){
     });
     socket.on('new message', function(data){
-      dispatch( {type: 'NEW_MESSAGE', text: data.msg, author: data.nick })
+      console.log('caught new data:', data);
+      dispatch( {type: 'NEW_MESSAGE', text: data.msg, user: data.nick, createdAt: data.createdAt })
     });
   }
   
