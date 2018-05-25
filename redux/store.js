@@ -41,7 +41,8 @@ const messageBox = (state = initialMessages, action) => {
             createdAt: action.createdAt,
             text: action.text,
             user: {
-              _id: action.author,
+              _id: action.user,
+              name: action.user,
             }
           }
         ])
