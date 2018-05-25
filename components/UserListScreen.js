@@ -5,32 +5,26 @@ import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { icons } from '../colors.js'
 
-const userlist = [
-  'Mark',
-  'James',
-  'Denise'
-];
-
-const UserListScreen = ( {counter, dispatch} ) => {
+const UserListScreen = ( {counter, userList, dispatch} ) => {
   const { screen, text, header, button, horizontal, user } = styles;
   console.log(counter);
   return(
       <View style={screen}>
         <Text style={header}>User List</Text>
-        <Text style={text}>Logged in: {counter}</Text>
+        <Text style={text}>Logged in: {userList.length}</Text>
         <View style={horizontal}>
           <FlatList 
-            data={userlist}
+            data={userList}
             renderItem={({item}) => (
               <Text style={user}>{item}</Text>
             )}
           />
-          <TouchableHighlight onPress={() => dispatch( {type: 'INCREMENT'})} >
+          {/* <TouchableHighlight onPress={() => dispatch( {type: 'INCREMENT'})} >
             <Ionicons style={text} name={'ios-add-circle'} size={50} color={icons} />
           </TouchableHighlight>
           <TouchableHighlight onPress={() => dispatch( {type: 'DECREMENT'})} >
             <Ionicons style={text} name={'ios-remove-circle'} size={50} color={icons} />
-          </TouchableHighlight>
+          </TouchableHighlight> */}
         </View>
       </View>
     )
@@ -38,7 +32,8 @@ const UserListScreen = ( {counter, dispatch} ) => {
 
 const mapStateToProps = (state, props) => {
   return {
-    counter: state.userCounter,
+    // counter: state.userCounter,
+    userList: state.userList,
   }
 }
 

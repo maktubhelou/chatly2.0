@@ -12,3 +12,10 @@ export const newMessage = (message, author) => {
     author: author,
   }
 }
+
+export const updateList = () => {
+  return {
+    type: 'UPDATE_LIST',
+    data,
+  }
+}

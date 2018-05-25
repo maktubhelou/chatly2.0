@@ -18,10 +18,24 @@ const initialMessages = [
   },
 ];
 
+const initialUserList = [
+  'No users',
+]
+
+const userList = (state = initialUserList, action) => {
+  switch(action.type) {
+    case 'UPDATE_LIST':
+      let updatedList = action.data.toString().split(',');
+      return updatedList;
+    default:
+      return state;
+  }
+}
+
+
 const messageBox = (state = initialMessages, action) => {
   switch(action.type) {
     case 'SEND_MESSAGE':
-      console.log(action);
       const { _id, text, createdAt, user} = action.text[0];
       return state.concat([
         {
@@ -52,7 +66,7 @@ const messageBox = (state = initialMessages, action) => {
   }
 }
 
-const userCounter = (state = 0, action) => {
+const userCounter = (state = userList, action) => {
   switch(action.type) {
     case 'INCREMENT':
       return state + 1;
@@ -66,6 +80,7 @@ const userCounter = (state = 0, action) => {
 const rootReducer = combineReducers({
   userCounter,
   messageBox,
+  userList,
 })
 
 export default store = createStore(rootReducer, middleware);
