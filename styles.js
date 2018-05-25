@@ -43,5 +43,19 @@ export default styles = StyleSheet.create({
     },
     shadowRadius: 25,
     shadowOpacity: 1.0
+  },
+  user: {
+    fontSize: 16,
+    color: '#7789aa',
+    backgroundColor: '#ddeeff',
+    marginTop: 2,
+    padding: 4,
+    shadowColor: '#221144',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0
   }
 })

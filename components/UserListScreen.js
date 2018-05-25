@@ -1,18 +1,30 @@
 import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, FlatList, ListItem } from 'react-native';
 import styles from '../styles';
 import { connect } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { icons } from '../colors.js'
 
+const userlist = [
+  'Mark',
+  'James',
+  'Denise'
+];
+
 const UserListScreen = ( {counter, dispatch} ) => {
-  const { screen, text, header, button, horizontal } = styles;
+  const { screen, text, header, button, horizontal, user } = styles;
   console.log(counter);
   return(
       <View style={screen}>
         <Text style={header}>User List</Text>
         <Text style={text}>Logged in: {counter}</Text>
         <View style={horizontal}>
+          <FlatList 
+            data={userlist}
+            renderItem={({item}) => (
+              <Text style={user}>{item}</Text>
+            )}
+          />
           <TouchableHighlight onPress={() => dispatch( {type: 'INCREMENT'})} >
             <Ionicons style={text} name={'ios-add-circle'} size={50} color={icons} />
           </TouchableHighlight>
