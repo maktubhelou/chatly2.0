@@ -7,7 +7,7 @@ const middleware = applyMiddleware(ReduxThunk, logger);
 
 const initialMessages = [
   {
-    _id: 1,
+    _id: 2,
     text: "Welcome to Chatly2.0! How's it going my friend?",
     createdAt: new Date(),
     user: {
@@ -19,7 +19,7 @@ const initialMessages = [
 ];
 
 const initialUserList = [
-  'No users',
+  'No users logged in',
 ]
 
 const userList = (state = initialUserList, action) => {
@@ -66,19 +66,7 @@ const messageBox = (state = initialMessages, action) => {
   }
 }
 
-const userCounter = (state = userList, action) => {
-  switch(action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
-    default:
-      return state;
-  }
-}
-
 const rootReducer = combineReducers({
-  userCounter,
   messageBox,
   userList,
 })
