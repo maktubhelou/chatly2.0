@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <title>Chat with socket.io and node.js Server</title>
+    <style>
+    #chat {
+      display: flex;
+      height: auto;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      background-color: aliceblue;
+      border: 1px solid blue;
+      justify-content: center;
+    }
+    #chat-history {
+      list-style-type: none;
+    }
+    #chat-history li:nth-child(odd) {
+      background-color: rgb(205, 219, 237);
+    }
+    #chatWrap {
+      display: hidden;
+    }
+    </style>
+  </head>
+  <body>
+    <h1> Welcome to Chatly Server 2.0 </h1>
+  </body>
+    <div id='userWrap'>
+      <div id='userForm'>
+        <p>Enter a username: </p>
+        <p id="nickError"></p>
+        <form id="setNick">
+          <input size="35" id="nickname"></input>
+          <input type="submit"></input>
+        </form>
+      </div>
+      <div id="users">
+      </div>
+    </div>
+    <div id="chatWrap">
+      <div id="chat">
+        <form id="send-message">
+          <input size="35" id="message"></input>
+          <input type="submit" ></input>
+        </form>
+      </div>
+    </div>
+    <div>
+      <ul id="chat-history"></ul>
+    </div>
+
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <script>
+      jQuery(function($) {
+        const socket = io.connect();
+        const $messageForm = $('#send-message');
+        const $messageBox = $('#message');
+        const $chat = $('#chat');
+        const $chatHistory = $('#chat-history');
+        const $setNick = $('#setNick');
+        const $nickError = $('#nickError');
+        const $nickBox =$('#nickname');
+        const $users = $('#users');
+        
+        $messageForm.submit(function(e) {
+          e.preventDefault();
+          socket.emit('send message', $messageBox.val());
+          $messageBox.val('');
+        });
+
+        $setNick.submit(function(e) {
+          e.preventDefault();
+          socket.emit('new user', $nickBox.val().trim(), function(data) {
+            if(data) {
+              $nickError.html('Thank you for registering.');
+              $('#setNick').hide();
+              $('#chatWrap').show();
+              $nickBox.val('');
+              $messageBox.val('Hi there!');
+            } else {
+              $nickError.html('That username is already taken.');
+              $nickBox.val('');
+            }
+          });
+        });
+
+        socket.on('usernames', function(data) {
+          let html = '';
+          for(i=0; i < data.length; i++) {
+            html += data[i] + '<br/>'
+          }
+          $users.html(html);
+        });
+
+        socket.on('new message', function(data){
+          console.log(data);
+          $chatHistory.append("<li><strong>" + data.nick + '</strong> says ' + data.msg);
+        })
+      });
+      </script>
+    </div>
+</html>

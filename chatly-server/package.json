@@ -1,0 +1,14 @@
+{
+  "name": "chatserver",
+  "description": "A simple chat server for demo purposes",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Mark Evans",
+  "dependencies": {
+    "socket.io": "2.1.1",
+    "express": "4.16.3"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
